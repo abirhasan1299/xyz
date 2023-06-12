@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block style %}
+<style>
+    form{
+    color:purple;
+}
+</style>
+{% endblock style %}
+{% block body %}
+<h1 style="color:whitesmoke;text-align: center;"> SignUp Page</h1>
+<div class="row">
+<div class="d-flex justify-content-around">
+    <form method="post" style="width:50%;">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="form-control btn btn-warning" value="Done" id="submit">
+    </form>
+</div>
+</div>
+{% endblock body %}
+{% block js %}
+<script type="text/javascript">
+
+</script>
+{% endblock js %}

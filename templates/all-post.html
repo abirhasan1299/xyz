@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+{% load humanize %}
+{% block title %}All Post{% endblock title %}
+{% block style %}
+<style>
+.icon i{
+            color:red;
+        }
+        #headers{
+            background:#10b981;
+            padding:5px;
+        }
+        .tag,.title,.icon{
+            padding:10px;
+        }
+        .x{
+            background:white;
+            
+        }
+        .x h1{
+            padding:5%;
+        }
+</style>
+{% endblock style %}
+{% block body %}
+<div class="row">
+    <div class="d-flex justify-content-around">
+             <div class="col-sm-10" id="content">
+            {% for obj in data %}
+               <div class="d-flex justify-content-between" id="headers">
+                    <div class="title">
+                        <h1 style="color:white;"> {{obj.title}} </h1>
+                    </div class="tag">
+                    <div>
+                        <span class="badge text-bg-info">{{obj.tag}}</span>
+                    </div>
+                    <div class="icon">
+                        <span class="badge text-bg-warning"><i class="bi bi-eye-fill"> </i> {{obj.view}}</span>
+                    </div>
+               </div>
+
+               <div class="x">
+                <h1 style="font-size:18px;">{{obj.detail|truncatechars:500|linebreaks}}</h1>
+                <div class="d-flex justify-content-around" id="footers">
+                <div>
+                    <span style="color:steelblue;"> <i class="bi bi-person-circle"></i> {{obj.operator}}</span>
+                </div>
+
+                <div style="padding-bottom:10px;">
+                    <a class="btn btn-danger" role="button" href="/post/{{obj.title}}/">View Full <i class="bi bi-chevron-double-right"></i> </a>
+                </div>
+               </div>
+               </div>
+               <br/>
+               {% endfor %}
+            </div>
+    </div>
+</div>
+
+{% endblock body %}
+{% block js %}
+
+{% endblock js %}

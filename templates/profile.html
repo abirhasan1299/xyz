@@ -1,0 +1,117 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block style %}
+<style>
+.complete{
+   position:fixed;
+   bottom:0px;
+   background:#22c55e;
+   width:80%;
+}
+.complete h4{
+   text-align:center;
+}
+form{
+   color:purple;
+}
+</style>
+{% endblock style %}
+{% block body%}
+<div class="complete"><h4>End-to-end Encrypted <i class="bi bi-person-fill-lock"></i></h4></div>
+<div class="row">  
+<div class="col-sm-5">
+        <h1 style="color:steelblue;margin-top:35%;"><center>Update Profile</center></h1>
+</div>
+
+<div class="col-sm-7">
+     <form method="post" class="was-validated">
+      {% csrf_token %}
+  <div class="mb-3">
+    <label for="validationTextarea" class="form-label">Bio</label>
+    <textarea class="form-control" id="validationTextarea" placeholder="Bio" name="bio" required></textarea>
+    <span id="bio"></span>
+    <div class="invalid-feedback">
+      Please enter a Bio this field.
+    </div>
+  </div>
+   <div class="mb-3">
+    <select class="form-select" name="rltn_status" required aria-label="select example">
+      <option value="">Relationship Status</option>
+      <option value="Married">Married</option>
+      <option value="Single">Single</option>
+      <option value="Complicated">Complicated</option>
+      <option value="Divorced">Divorced</option>
+      <option value="Separated">Separated</option>
+      <option value="Untold Story">Untold Story</option>
+      <option value="Break Up">Break Up</option>
+    </select>
+    <div class="invalid-feedback">Choose Relationship Status</div>
+  </div>
+  <div class="d-flex justify-content-between">
+   <div class="">
+    <select class="form-select" id="validationTooltip04" required>
+      <option selected value="+880">+880 (Bangladesh)</option>
+      <option  value="+91">+91 (India)</option>
+      <option  value="+92">+92 (Pakistan)</option>
+      <option  value="+1">+1 (United States)</option>
+    </select>
+    <label for="validationTooltip04" class="form-label">Country Code</label>
+  </div>
+   <div class="mb-3">
+      <input type="number" id="mobile" name="mobile" class="form-control" placeholder="Personal Mobile" required>
+      <div id="mobile_text"></div>
+  </div>
+  </div>
+  <div class="mb-3">
+    <select class="form-select" name="gender" required aria-label="select example">
+      <option value="">Gender</option>
+      <option value="Gay">Gay</option>
+      <option value="Lesbian">Lesbian</option>
+      <option value="Trans">Trans</option>
+      <option value="Undefined">Undefined</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+    <div class="invalid-feedback">Choose your professional gender</div>
+  </div>
+  <div class="d-flex justify-content-between">
+   <div class="form-check mb-3">
+      <input type="checkbox" class="form-check-input" id="validationFormCheck1" required>
+      <label class="form-check-label" for="validationFormCheck1">I agree in <a href="#">terms & conditions</a></label>
+      <div class="invalid-feedback">Must be agree with us</div>
+   </div>
+   <div class="mb-3">
+      <input class="btn btn-primary" type="submit" id="submit" value="Update-Information">
+   </div>
+  </div>
+</form>
+</div>
+</div>
+{% endblock body %}
+{% block js %}
+<script type="text/javascript">
+   const bio = document.querySelector("#validationTextarea");
+   bio.onkeyup = function(e){
+      if(bio.value.length < 20){
+         document.getElementById("bio").innerHTML = "<p style='color:red;'><i class='bi bi-x-circle'></i> At least 20 characters</p>";
+         document.getElementById("submit").disabled=true;
+      }else if(bio.value.length >=20){
+         document.getElementById("bio").innerHTML = "<p style='color:green;'><i class='bi bi-check2-circle'></i> Okay</p>";
+         document.getElementById("submit").disabled = false;
+      }
+   }
+   const phone = document.querySelector("#mobile");
+   phone.onkeyup = function(e){
+      if(phone.value.length < 10){
+         document.getElementById("mobile_text").innerHTML = "<p style='color:red;'><i class='bi bi-x-circle'></i> At least 10 digits</p>";
+         document.getElementById("submit").disabled=true;
+      }else if(phone.value.length >10){
+         document.getElementById("mobile_text").innerHTML = "<p style='color:red;'><i class='bi bi-x-circle'></i> Not greater than 10 digit</p>";
+         document.getElementById("submit").disabled = true;
+      }else if(phone.value.length ==10){
+         document.getElementById("mobile_text").innerHTML = "<p style='color:green;'><i class='bi bi-check2-circle'></i> Okay</p>";
+         document.getElementById("submit").disabled = false;
+      }
+   }
+</script>
+{% endblock js %}
